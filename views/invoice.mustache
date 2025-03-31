@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      page-break-inside: auto;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+    .keep-together {
+      page-break-inside: avoid;
+      margin-top: 20px;
+    }
+    .total {
+      text-align: right;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+    .qr {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .iban {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        {{#table.columns}}
+          <th style="width: {{../columnWidth}}%;">{{.}}</th>
+        {{/table.columns}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#table.rows}}
+        <tr>
+          {{#.}}
+            <td style="width: {{../columnWidth}}%;">{{.}}</td>
+          {{/.}}
+        </tr>
+      {{/table.rows}}
+    </tbody>
+  </table>
+
+  <div class="keep-together">
+    {{#total}}
+    <div class="total">
+      Celkem k úhradě: {{total}}
+    </div>
+    {{/total}}
+
+    {{#note}}
+    <div class="note">
+      Poznámka: {{note}}
+    </div>
+    {{/note}}
+
+    {{#showIban}}
+    <div class="iban">
+      Číslo účtu: {{header.iban}}
+    </div>
+    {{/showIban}}
+
+    {{#qr_code}}
+    <div class="qr">
+      <img src="{{qr_code}}" alt="QR kód" width="150" />
+    </div>
+    {{/qr_code}}
+  </div>
+
+</body>
+</html>
