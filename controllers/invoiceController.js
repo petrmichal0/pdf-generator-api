@@ -50,7 +50,6 @@ exports.generateInvoice = async (req, res, next) => {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       headless: true,
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
     });
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
