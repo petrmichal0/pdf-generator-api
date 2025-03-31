@@ -72,6 +72,6 @@ exports.generateInvoice = async (req, res, next) => {
       file: filename,
     });
   } catch (err) {
-    next(createAppError("Chyba při generování faktury", 500));
+    next(createAppError(`Chyba při generování faktury: ${err.message}`, 500));
   }
 };
